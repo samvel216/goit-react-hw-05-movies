@@ -1,0 +1,18 @@
+.homeLink {
+  color: blue;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 500;
+  font-style: italic;
+}
+.homeList {
+  list-style: none;
+}
+.item {
+  margin-bottom: 10px;
+}
+.item:hover .homeLink,
+.item:focus .homeLink {
+  color: brown;
+  text-decoration: underline brown;
+}
