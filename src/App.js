@@ -12,21 +12,16 @@ const Reviews = lazy(() => import("./Pages/Reviews/Reviews"))
 
 export const App = () => {
     const [value, setValue] = useState([]);
-    const [inputValue, setInputValue] = useState('');
 
 
-    const [id, setId] = useState();
-    const [moreCard, setMoreCard] = useState();
+
+
     useEffect(() => {
         fetchData().then(setValue);
     }, []);
 
 
-    const handleClick = event => {
-        event.preventDefault();
-        setId(event.currentTarget.id);
-        console.log(moreCard);
-    };
+
 
     return (
         <div className={styles.mainDiv}>
@@ -42,9 +37,9 @@ export const App = () => {
             <Suspense fallback={<div>Loading subpage...</div>}>
                 <Routes>
 
-                    <Route path="/" exact element={<Home fetchArray={value} handleClick={handleClick} />} />
+                    <Route path="/" exact element={<Home fetchArray={value} />} />
 
-                    <Route path="/movies" element={<Movies inputValue={inputValue} />} >
+                    <Route path="/movies" element={<Movies />} >
 
                     </Route>
 
