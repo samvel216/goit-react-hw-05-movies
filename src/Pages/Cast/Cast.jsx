@@ -6,7 +6,7 @@ export default function Cast() {
   const [value, setValue] = useState([]);
   useEffect(() => {
     featchCastData(movieId).then(response => setValue(response));
-  }, []);
+  }, [movieId]);
   return (
     <ul>
       {value.map(element => (

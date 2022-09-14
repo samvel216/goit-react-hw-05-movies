@@ -7,7 +7,7 @@ export default function Reviews() {
   const [value, setValue] = useState([]);
   useEffect(() => {
     featchReviewsData(movieId).then(response => setValue(response));
-  }, []);
+  }, [movieId]);
 
   return (
     <ul>

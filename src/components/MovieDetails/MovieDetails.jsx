@@ -10,7 +10,7 @@ export default function MovieDetails() {
   const [value, setValue] = useState({});
   useEffect(() => {
     fetchIdData(movieId).then(response => setValue(response));
-  }, []);
+  }, [movieId]);
 
   return (
     <div>
