@@ -1,0 +1,80 @@
+.MovieDetailsBtnLink {
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 16px;
+  letter-spacing: 0.02em;
+  color: white;
+}
+.MovieDetailsGoBackBtn {
+  padding: 4px 16px;
+  background-color: rgb(108, 108, 238);
+  margin-top: 10px;
+  border: none;
+  border-radius: 4px;
+}
+.MovieDetailsGoBackBtn:hover {
+  background-color: rgb(0, 0, 255);
+}
+.mainDiv {
+  width: 900px;
+  margin: 0 auto;
+}
+.MovieDetailsFilmTitle {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 16px;
+  letter-spacing: 0.03em;
+}
+/*.MovieDetails*/
+.MovieDetailsGrade {
+  font-style: italic;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 16px;
+  letter-spacing: 0.02em;
+}
+.MovieDetailsGenresList {
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+.MovieDetailsGenresList .MovieDetailsItem {
+  margin-left: 10px;
+}
+.MovieDetailsGenresList .MovieDetailsItem:first-child {
+  margin-left: 0px;
+}
+.MovieDetailsGenresListText {
+  margin: 0;
+}
+.MovieDetailsAditionalList {
+  margin-top: 30px;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.MovieDetailsAditionalListItem {
+  margin-bottom: 20px;
+}
+.MovieDetailsAditionalListItem:last-child {
+  margin-bottom: 0px;
+}
+.MovieDetailsCast {
+  text-decoration: none;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 16px;
+  letter-spacing: 0.02em;
+  color: black;
+  padding: 10px 30px;
+  border-radius: 5px;
+}
+.MovieDetailsCast:hover {
+  background-color: rgb(255, 0, 0);
+  color: white;
+}

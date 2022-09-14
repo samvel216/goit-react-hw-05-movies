@@ -4,6 +4,7 @@ const fetchIdData = async (id) => {
             `https://api.themoviedb.org/3/movie/${id}?api_key=7dbf47df91b7f7e1806a00fc91ccd5f6&language=en-US`
         );
         const fetchArray = await response.json();
+        console.log(fetchArray);
         return fetchArray;
     } catch (error) {
         console.log(error);
@@ -15,7 +16,9 @@ const fetchData = async () => {
             `https://api.themoviedb.org/3/trending/movie/day?api_key=7dbf47df91b7f7e1806a00fc91ccd5f6`
         );
         const fetchArray = await response.json();
+        console.log(fetchArray.results);
         return fetchArray.results;
+
     } catch (error) {
         console.log(error);
     }
@@ -38,6 +41,7 @@ const featchCastData = async (id) => {
             `https://api.themoviedb.org/3/movie/${id}/credits?api_key=7dbf47df91b7f7e1806a00fc91ccd5f6&language=en-US`
         );
         const fetchArray = await response.json();
+        console.log(fetchArray.cast);
         return fetchArray.cast;
     } catch (error) {
         console.log(error);
@@ -50,6 +54,7 @@ const featchReviewsData = async (id) => {
             `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=7dbf47df91b7f7e1806a00fc91ccd5f6&language=en-US&page=1`
         );
         const fetchArray = await response.json();
+        console.log(fetchArray.results);
         return fetchArray.results;
     } catch (error) {
         console.log(error);

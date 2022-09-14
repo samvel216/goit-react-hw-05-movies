@@ -1,20 +1,46 @@
 import { fetchInputData } from '../../Api';
-import { Link, Outlet } from 'react-router-dom';
-export default function Movies({
-  inputMoviesChange,
-  searchInputForm,
-  inputValue,
-}) {
-  console.log(inputValue);
+import { useState, useEffect } from 'react';
+import { Link, Outlet, useLocation } from 'react-router-dom';
+import styles from './Movie.module.css';
+export default function Movies() {
+  const [inputValue, setInputValue] = useState('');
+  const [testInputValue, setTestInputValue] = useState('');
+  const [value, setValue] = useState([]);
+  const location = useLocation();
+  useEffect(() => {
+    fetchInputData(inputValue).then(response => setValue(response));
+  }, [inputValue]);
+  const searchInputForm = event => {
+    event.preventDefault();
+    setInputValue(testInputValue);
+  };
+  const inputMoviesChange = event => {
+    setTestInputValue(event.target.value);
+  };
   return (
-    <form action="" onSubmit={searchInputForm}>
-      <label htmlFor="">
-        <input type="text" onChange={inputMoviesChange} />
-      </label>
-      <button>
-        <Link to={`/movies?query=${inputValue}`}>Перейди сучка</Link>
-        <Outlet />
-      </button>
-    </form>
+    <div>
+      <form action="" onSubmit={searchInputForm}>
+        <label htmlFor="">
+          <input type="text" onChange={inputMoviesChange} />
+        </label>
+        <button className={styles.SearchBtn} type="submit">
+          Пошел на хуй
+        </button>
+      </form>
+      <ul className={styles.MovieList}>
+        {value !== undefined &&
+          value.map(element => (
+            <li id={element.id} className={styles.item} key={element.id}>
+              <Link
+                className={styles.MovieLink}
+                to={`${element.id}`}
+                state={{ from: location }}
+              >
+                {element.original_title}
+              </Link>
+            </li>
+          ))}
+      </ul>
+    </div>
   );
 }

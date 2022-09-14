@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react';
-import { Routes, Route, NavLink, Link, Switch } from 'react-router-dom';
-import Home from './components/Home/Home';
-import Movies from './components/Movie/Movie';
-import MovieDetails from './components/MovieDetails/MovieDetails';
-import { Cast } from './Pages/Cast/Cast';
-import { Reviews } from './Pages/Reviews/Reviews';
-import { MovieList } from './Pages/MovieList/MovieList';
+import { useState, useEffect, lazy, Suspense } from 'react';
+import { Routes, Route, NavLink, Switch, useLocation } from 'react-router-dom';
 import { fetchData, fetchInputData } from './Api';
+import styles from './components/MovieDetails/MovieDetails.module.css';
+import { Link, Header } from "./StyledComponents.js";
+const Home = lazy(() => import("./components/Home/Home"))
+const Movies = lazy(() => import("./components/Movie/Movie"))
+const MovieDetails = lazy(() => import("./components/MovieDetails/MovieDetails"))
+const Cast = lazy(() => import("./Pages/Cast/Cast"))
+const Reviews = lazy(() => import("./Pages/Reviews/Reviews"))
+const MovieList = lazy(() => import("./Pages/MovieList/MovieList"))
 
 export const App = () => {
     const [value, setValue] = useState([]);
@@ -18,51 +20,41 @@ export const App = () => {
     useEffect(() => {
         fetchData().then(setValue);
     }, []);
-    useEffect(() => {
-        fetchInputData(inputValue).then(setMoviaArray);
-    }, [inputValue]);
 
-    const inputMoviesChange = event => {
-        setTestInputValue(event.target.value);
-    };
-    const searchInputForm = event => {
-        event.preventDefault();
-        setInputValue(testInputValue);
-    };
+
     const handleClick = event => {
         event.preventDefault();
         setId(event.currentTarget.id);
         console.log(moreCard);
     };
-    const StyledLink = styled(NavLink)`
-    color: white;
-    text-decoration: none;
-    padding: 10px 30px;
-    background-color: orange;
-    &.active {
-      text-decoration: underline brown;
-      background-color: rgb(255, 52, 1);
-    }
-  `;
-    return (
-        <div>
-            <nav>
-                <StyledLink to="/">Home</StyledLink>
-                <StyledLink to="/movies">Movies</StyledLink>
-                <StyledLink to="/movies/:movieId">Home</StyledLink>
-            </nav>
-            <Routes>
 
-                <Route path="/" exact element={<Home fetchArray={value} handleClick={handleClick} />} />
-                <Route path="/movies" element={<Movies inputMoviesChange={inputMoviesChange}
-                    searchInputForm={searchInputForm} inputValue={inputValue} />} >
-                    <Route path={`?query=${inputValue}`} element={<MovieList inputValue={inputValue} handleClick={handleClick} />} />
-                </Route>
-                <Route path="/movies/:movieId" element={<MovieDetails />} >
-                    <Route path="cast" element={<Cast />} />
-                    <Route path="reviews" element={<Reviews />} />
-                </Route>
-            </Routes>
+    return (
+        <div className={styles.mainDiv}>
+            <Header>
+                <nav>
+                    <Link to="/">Home</Link>
+                    <Link to="/movies">Movies</Link>
+                    <Link to="/movies/:movieId"></Link>
+
+                </nav>
+            </Header>
+
+            <Suspense fallback={<div>Loading subpage...</div>}>
+                <Routes>
+
+                    <Route path="/" exact element={<Home fetchArray={value} handleClick={handleClick} />} />
+
+                    <Route path="/movies" element={<Movies inputValue={inputValue} />} >
+                        <Route path={`query=${inputValue}`} element={<MovieList moviaArray={moviaArray} handleClick={handleClick} />} />
+                    </Route>
+
+
+                    <Route path="/movies/:movieId" element={<MovieDetails />} >
+                        <Route path="cast" element={<Cast />} />
+                        <Route path="reviews" element={<Reviews />} />
+                    </Route>
+                </Routes>
+            </Suspense>
         </div>
     );
 };

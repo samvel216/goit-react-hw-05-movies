@@ -1,11 +1,14 @@
 import { featchReviewsData } from '../../Api';
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-export const Reviews = () => {
+export default function Reviews() {
   const { movieId } = useParams();
   const [value, setValue] = useState([]);
-  featchReviewsData(movieId).then(response => setValue(response));
+  useEffect(() => {
+    featchReviewsData(movieId).then(response => setValue(response));
+  }, []);
+
   return (
     <ul>
       {value.map(element => (
@@ -18,4 +21,4 @@ export const Reviews = () => {
       ))}
     </ul>
   );
-};
+}

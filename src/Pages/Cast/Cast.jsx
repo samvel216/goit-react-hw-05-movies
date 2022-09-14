@@ -1,10 +1,12 @@
 import { featchCastData } from '../../Api';
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
-export const Cast = () => {
+import { useState, useEffect } from 'react';
+export default function Cast() {
   const { movieId } = useParams();
   const [value, setValue] = useState([]);
-  featchCastData(movieId).then(response => setValue(response));
+  useEffect(() => {
+    featchCastData(movieId).then(response => setValue(response));
+  }, []);
   return (
     <ul>
       {value.map(element => (
@@ -21,4 +23,4 @@ export const Cast = () => {
       ))}
     </ul>
   );
-};
+}
