@@ -1,6 +1,6 @@
 import { fetchInputData } from '../../Api';
 import { useState, useEffect } from 'react';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styles from './Movie.module.css';
 export default function Movies() {
   const [inputValue, setInputValue] = useState('');
@@ -24,7 +24,7 @@ export default function Movies() {
           <input type="text" onChange={inputMoviesChange} />
         </label>
         <button className={styles.SearchBtn} type="submit">
-          Пошел на хуй
+          Search
         </button>
       </form>
       <ul className={styles.MovieList}>

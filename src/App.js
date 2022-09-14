@@ -1,6 +1,6 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
-import { Routes, Route, NavLink, Switch, useLocation } from 'react-router-dom';
-import { fetchData, fetchInputData } from './Api';
+import { Routes, Route } from 'react-router-dom';
+import { fetchData } from './Api';
 import styles from './components/MovieDetails/MovieDetails.module.css';
 import { Link, Header } from "./StyledComponents.js";
 const Home = lazy(() => import("./components/Home/Home"))
@@ -8,13 +8,13 @@ const Movies = lazy(() => import("./components/Movie/Movie"))
 const MovieDetails = lazy(() => import("./components/MovieDetails/MovieDetails"))
 const Cast = lazy(() => import("./Pages/Cast/Cast"))
 const Reviews = lazy(() => import("./Pages/Reviews/Reviews"))
-const MovieList = lazy(() => import("./Pages/MovieList/MovieList"))
+
 
 export const App = () => {
     const [value, setValue] = useState([]);
     const [inputValue, setInputValue] = useState('');
-    const [testInputValue, setTestInputValue] = useState('');
-    const [moviaArray, setMoviaArray] = useState([]);
+
+
     const [id, setId] = useState();
     const [moreCard, setMoreCard] = useState();
     useEffect(() => {
@@ -45,7 +45,7 @@ export const App = () => {
                     <Route path="/" exact element={<Home fetchArray={value} handleClick={handleClick} />} />
 
                     <Route path="/movies" element={<Movies inputValue={inputValue} />} >
-                        <Route path={`query=${inputValue}`} element={<MovieList moviaArray={moviaArray} handleClick={handleClick} />} />
+
                     </Route>
 
 
