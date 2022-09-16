@@ -9,19 +9,13 @@ const MovieDetails = lazy(() => import("./components/MovieDetails/MovieDetails")
 const Cast = lazy(() => import("./Pages/Cast/Cast"))
 const Reviews = lazy(() => import("./Pages/Reviews/Reviews"))
 
-
 export const App = () => {
     const [value, setValue] = useState([]);
 
-
-
-
     useEffect(() => {
         fetchData().then(setValue);
+
     }, []);
-
-
-
 
     return (
         <div className={styles.mainDiv}>
@@ -30,20 +24,14 @@ export const App = () => {
                     <Link to="/">Home</Link>
                     <Link to="/movies">Movies</Link>
                     <Link to="/movies/:movieId"></Link>
-
                 </nav>
             </Header>
-
             <Suspense fallback={<div>Loading subpage...</div>}>
                 <Routes>
-
-                    <Route path="/" exact element={<Home fetchArray={value} />} />
-
+                    <Route path="/*" element={<Home fetchArray={value} />} />
                     <Route path="/movies" element={<Movies />} >
 
                     </Route>
-
-
                     <Route path="/movies/:movieId" element={<MovieDetails />} >
                         <Route path="cast" element={<Cast />} />
                         <Route path="reviews" element={<Reviews />} />

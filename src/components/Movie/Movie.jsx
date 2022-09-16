@@ -1,18 +1,29 @@
 import { fetchInputData } from '../../Api';
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styles from './Movie.module.css';
 export default function Movies() {
-  const [inputValue, setInputValue] = useState('');
   const [testInputValue, setTestInputValue] = useState('');
   const [value, setValue] = useState([]);
   const location = useLocation();
+
+  const navigate = useNavigate();
+
+  const sortOrder = new URLSearchParams(location.search).get('query');
+
   useEffect(() => {
-    fetchInputData(inputValue).then(response => setValue(response));
-  }, [inputValue]);
+    if (sortOrder === null) {
+      return;
+    }
+    fetchInputData(sortOrder).then(response => setValue(response));
+  }, [sortOrder]);
+
   const searchInputForm = event => {
     event.preventDefault();
-    setInputValue(testInputValue);
+    navigate({
+      ...location,
+      search: `query=${testInputValue}`,
+    });
   };
   const inputMoviesChange = event => {
     setTestInputValue(event.target.value);
