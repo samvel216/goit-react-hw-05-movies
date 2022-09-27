@@ -13,45 +13,54 @@ export default function MovieDetails() {
   }, [movieId]);
 
   return (
-    <div>
-      <button className={styles.MovieDetailsGoBackBtn}>
-        <Link className={styles.MovieDetailsBtnLink} to={backLinkHref}>
-          Go back
-        </Link>
-      </button>
-      <h2 className={styles.MovieDetailsFilmTitle}>{value.original_title}</h2>
-      <p className={styles.MovieDetailsGrade}>
-        User Score: {value.vote_average}
-      </p>
-      <h3>Overwiew</h3>
-      <p>{value.overview}</p>
-      <h3>Genres</h3>
+    <div className={styles.MovieDetailsContainer}>
+      <div className={styles.MovieDetailsTextContainer}>
+        <button className={styles.MovieDetailsGoBackBtn}>
+          <Link className={styles.MovieDetailsBtnLink} to={backLinkHref}>
+            Go back
+          </Link>
+        </button>
+        <h2 className={styles.MovieDetailsFilmTitle}>{value.original_title}</h2>
+        <p className={styles.MovieDetailsGrade}>
+          User Score: {value.vote_average}
+        </p>
+        <h3>Overwiew</h3>
+        <p>{value.overview}</p>
+        <h3>Genres</h3>
 
-      <ul className={styles.MovieDetailsGenresList}>
-        {value.genres &&
-          value.genres.map(element => (
-            <li className={styles.MovieDetailsItem}>
-              <p className={styles.MovieDetailsGenresListText}>
-                {element.name}
-              </p>
-            </li>
-          ))}
-      </ul>
-      <ul className={styles.MovieDetailsAditionalList}>
-        <li className={styles.MovieDetailsAditionalListItem}>
-          <Link className={styles.MovieDetailsCast} to="cast">
-            Cast
-          </Link>
-        </li>
-        <li className={styles.MovieDetailsAditionalListItem}>
-          <Link className={styles.MovieDetailsCast} to="reviews">
-            Reviews
-          </Link>
-        </li>
-      </ul>
-      <Suspense fallback={<div>Loading subpage...</div>}>
-        <Outlet />
-      </Suspense>
+        <ul className={styles.MovieDetailsGenresList}>
+          {value.genres &&
+            value.genres.map(element => (
+              <li className={styles.MovieDetailsItem}>
+                <p className={styles.MovieDetailsGenresListText}>
+                  {element.name}
+                </p>
+              </li>
+            ))}
+        </ul>
+        <ul className={styles.MovieDetailsAditionalList}>
+          <li className={styles.MovieDetailsAditionalListItem}>
+            <Link className={styles.MovieDetailsCast} to="cast">
+              Cast
+            </Link>
+          </li>
+          <li className={styles.MovieDetailsAditionalListItem}>
+            <Link className={styles.MovieDetailsCast} to="reviews">
+              Reviews
+            </Link>
+          </li>
+        </ul>
+        <Suspense fallback={<div>Loading subpage...</div>}>
+          <Outlet />
+        </Suspense>
+      </div>
+      <div className={styles.MovieDetailsImgContainer}>
+        <img
+          className={styles.MovieDetailsPoster}
+          src={`https://image.tmdb.org/t/p/w200/${value.poster_path}`}
+          alt={`Постер ${value.original_title}`}
+        />
+      </div>
     </div>
   );
 }
