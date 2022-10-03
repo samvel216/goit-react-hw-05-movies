@@ -21,18 +21,18 @@ export const App = () => {
         <div className={styles.mainDiv}>
             <Header>
                 <nav>
-                    <Link to="/goit-react-hw-05-movies/">Home</Link>
-                    <Link to="/goit-react-hw-05-movies/movies">Movies</Link>
-                    <Link to="/goit-react-hw-05-movies/movies/:movieId"></Link>
+                    <Link to="/">Home</Link>
+                    <Link to="/movies">Movies</Link>
+                    <Link to="/movies/:movieId"></Link>
                 </nav>
             </Header>
             <Suspense fallback={<div>Loading subpage...</div>}>
                 <Routes>
-                    <Route path="/goit-react-hw-05-movies/*" element={<Home fetchArray={value} />} />
-                    <Route path="/goit-react-hw-05-movies/movies" element={<Movies />} >
+                    <Route path="/*" element={<Home fetchArray={value} />} />
+                    <Route path="/movies" element={<Movies />} >
 
                     </Route>
-                    <Route path="/goit-react-hw-05-movies/movies/:movieId" element={<MovieDetails />} >
+                    <Route path="/movies/:movieId" element={<MovieDetails />} >
                         <Route path="cast" element={<Cast />} />
                         <Route path="reviews" element={<Reviews />} />
                     </Route>
