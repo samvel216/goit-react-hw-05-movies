@@ -1,4 +1,4 @@
-import { useParams, Outlet, useLocation } from 'react-router-dom';
+import {useNavigate , useParams, Outlet, useLocation } from 'react-router-dom';
 import { useState, useEffect, Suspense } from 'react';
 import { fetchIdData } from '../../Api';
 import { Link } from 'react-router-dom';
@@ -6,8 +6,13 @@ import styles from './MovieDetails.module.css';
 export default function MovieDetails() {
   const { movieId } = useParams();
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? '/';
+  console.log(location.state);
+  // const backLinkHref = location.state?.from ?? '/';
   const [value, setValue] = useState({});
+  const navigate = useNavigate();
+  const goBack = () => navigate(location.state.from);
+  
+
   useEffect(() => {
     fetchIdData(movieId).then(response => setValue(response));
   }, [movieId]);
@@ -15,10 +20,8 @@ export default function MovieDetails() {
   return (
     <div className={styles.MovieDetailsContainer}>
       <div className={styles.MovieDetailsTextContainer}>
-        <button className={styles.MovieDetailsGoBackBtn}>
-          <Link className={styles.MovieDetailsBtnLink} to={backLinkHref}>
-            Go back
-          </Link>
+      <button onClick={goBack} className={styles.MovieDetailsGoBackBtn}>
+          Go back
         </button>
         <h2 className={styles.MovieDetailsFilmTitle}>{value.original_title}</h2>
         <p className={styles.MovieDetailsGrade}>
@@ -40,12 +43,12 @@ export default function MovieDetails() {
         </ul>
         <ul className={styles.MovieDetailsAditionalList}>
           <li className={styles.MovieDetailsAditionalListItem}>
-            <Link className={styles.MovieDetailsCast} to="cast">
+            <Link state={location.state} className={styles.MovieDetailsCast} to="cast">
               Cast
             </Link>
           </li>
           <li className={styles.MovieDetailsAditionalListItem}>
-            <Link className={styles.MovieDetailsCast} to="reviews">
+            <Link state={location.state} className={styles.MovieDetailsCast} to="reviews">
               Reviews
             </Link>
           </li>

@@ -81,6 +81,7 @@
 .MovieDetailsPoster {
   min-width: 250px;
 }
+
 .MovieDetailsContainer {
   display: flex;
   justify-content: space-between;
